@@ -37,14 +37,14 @@ pipeline {
 
                 }
 
-                git branch: ""${gitlabBranch}"", credentialsId: 'nashira-id', url: ""${gitlabSourceRepoHttpUrl}""
+                git branch: "${gitlabBranch}", credentialsId: 'nashira-id', url: "${gitlabSourceRepoHttpUrl}"
             }
         }
                         
                 stage('Docker Build Image') {
             steps {
                                 script {
-                                        sh ""docker build . -f Dockerfile -t ${CONTAINER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}""
+                                        sh "docker build . -f Dockerfile -t ${CONTAINER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
                                 }
             }
 
@@ -60,9 +60,9 @@ pipeline {
                 
                 stage ('Deployment Docker') {
           steps{
-                sh ""docker stop ${IMAGE_NAME} || true""
-                sh ""docker rm ${IMAGE_NAME} || true""
-                sh ""docker run -d --name ${IMAGE_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} ${CONTAINER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}""
+                sh "docker stop ${IMAGE_NAME} || true"
+                sh "docker rm ${IMAGE_NAME} || true"
+                sh "docker run -d --name ${IMAGE_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} ${CONTAINER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
           }
 
             post {
@@ -79,9 +79,9 @@ pipeline {
 }
 
 def showTraceLog() {
-    echo "">> [TRACE] Jenkins env BUILD_NUMBER is ${env.BUILD_NUMBER}""
-    echo "">> [TRACE] Jenkins env BUILD_TAG is ${env.BUILD_TAG}""
-    echo "">> [TRACE] Gitlab env gitlabBranch is ${env.gitlabBranch}""
+    echo ">> [TRACE] Jenkins env BUILD_NUMBER is ${env.BUILD_NUMBER}"
+    echo ">> [TRACE] Jenkins env BUILD_TAG is ${env.BUILD_TAG}"
+    echo ">> [TRACE] Gitlab env gitlabBranch is ${env.gitlabBranch}"
     echo "">> [TRACE] Gitlab env gitlabSourceBranch is ${env.gitlabSourceBranch}""
     echo "">> [TRACE] Gitlab env gitlabActionType is ${env.gitlabActionType}""
     echo "">> [TRACE] Gitlab env gitlabUserName is ${env.gitlabUserName}""
@@ -109,5 +109,5 @@ def showTraceLog() {
     echo "">> [TRACE] Gitlab env gitlabTargetRepoHttpUrl is ${env.gitlabTargetRepoHttpUrl}""
     echo "">> [TRACE] Gitlab env gitlabBefore is ${env.gitlabBefore}""
     echo "">> [TRACE] Gitlab env gitlabAfter is ${env.gitlabAfter}""
-    echo "">> [TRACE] Gitlab env gitlabTriggerPhrase is ${env.gitlabTriggerPhrase}""
+    echo ">> [TRACE] Gitlab env gitlabTriggerPhrase is ${env.gitlabTriggerPhrase}"
 }
