@@ -6,7 +6,7 @@ let bearerToken =
 const API = axios.create();
 
 export const setAxiosConfig = (token: string) => {
-  // bearerToken = token;
+//   // bearerToken = token;
 };
 
 API.interceptors.request.use((axiosConfig) => {
