@@ -28,24 +28,11 @@ pipeline {
     }
 
     stages {
-
-        stage('Code Release') {
+        stage('Docker Build Image') {
             steps {
-
                 script {
-                showTraceLog()
-
-                }
-
-                git branch: "${gitlabBranch}", credentialsId: 'nashira-id', url: "${gitlabSourceRepoHttpUrl}"
-            }
-        }
-                        
-                stage('Docker Build Image') {
-            steps {
-                                script {
-                                        sh "docker build . -f Dockerfile -t ${CONTAINER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
-                                }
+                    sh "docker build . -f Dockerfile -t ${CONTAINER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+                    }
             }
 
             post {
