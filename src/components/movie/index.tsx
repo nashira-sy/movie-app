@@ -1,36 +1,28 @@
-import React from 'react'
-import {Card} from './../card/index';
-import type { Movie } from '../../services/movie';
-
-// interface Movie {
-//   date: string;
-//   title: string;
-//   duration: string;
-//   rating: number;
-//   genre: string[];
-//   img: string;
-// }
+// src/components/movie.tsx
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import type { Movie } from "../../services/movie";
 
 interface Props {
   movie: Movie;
 }
 
-const MovieComponent = ({ movie }: Props) => {
- 
-    const { title,poster_path } = movie;
+const MovieComponent: React.FC<Props> = ({ movie }) => {
+  const navigate = useNavigate();
 
   return (
-    <Card color="#ffffff" border="10px" width="w-50">
-      <div>
-        <img
-          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-          alt={title}
-          style={{ width: "150px", height: "225px", borderRadius: "10px" }}
-        />
-      </div>
-      <p className='w-[150px]'>{title}</p>
-    </Card>
+    <div
+      className="cursor-pointer w-40 flex-shrink-0"
+      onClick={() => navigate(`/detail/${movie.id}`)}
+    >
+      <img
+        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+        alt={movie.title}
+        className="rounded-lg shadow-md"
+      />
+      <h2 className="mt-2 text-sm font-semibold truncate">{movie.title}</h2>
+    </div>
   );
 };
 
-export default MovieComponent
+export default MovieComponent;

@@ -1,4 +1,4 @@
-// src/hooks/movie/useNowPlaying.tsx
+
 
 import { useState, useEffect } from "react";
 import type { Movie } from "../../services/movie/type";
