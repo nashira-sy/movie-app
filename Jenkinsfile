@@ -17,8 +17,8 @@ if (env.gitlabBranch != null) {
 }
 
 pipeline {
-    // agent { label 'main' }
-    agent any
+    agent { label 'main' }
+    // agent any
     
     environment {
         IMAGE_NAME = "jdt16-nashira"
