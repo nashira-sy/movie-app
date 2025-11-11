@@ -58,3 +58,14 @@ export const getTopRated = async () => {
   }
 };
 
+export const getMovieVideos = async (id: number) => {
+  try {
+    const response = await API.get(`movie/${id}/videos`);
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error: any) {
+    console.error(error);
+  }
+};
+
